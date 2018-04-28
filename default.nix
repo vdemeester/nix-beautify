@@ -1,4 +1,4 @@
-with import <nixpkgs> {};
+{ pkgs ? import <nixpkgs> {} }:
 
 pkgs.stdenv.mkDerivation {
   name = "nix-beautify";
@@ -12,7 +12,7 @@ pkgs.stdenv.mkDerivation {
     cp $src/nix-beautify.js $out/js
     cat > $out/bin/nix-beauitfy << EOF
     #!/usr/bin/env bash 
-    ${nodejs}/bin/node $out/js/nix-beautify.js
+    ${pkgs.nodejs}/bin/node $out/js/nix-beautify.js
     EOF
     chmod u+x $out/bin/nix-beauitfy
   '';
